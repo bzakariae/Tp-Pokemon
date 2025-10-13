@@ -1,0 +1,8 @@
+{
+  "name": "cordova-plugin-advanced-vibration",
+  "version": "1.0.0",
+  "description": "Plugin Cordova de vibration avancée",
+  "main": "www/AdvancedVibration.js",
+  "author": "Zakariae",
+  "license": "MIT"
+}

@@ -14,13 +14,13 @@ function getRandomPokemon() {
         .then(data => {
             currentPokemon = data;
             const img = document.getElementById("pokemonImage");
-            img.src = data.sprites.regular;  // <-- ici on prend la bonne URL
-            img.alt = data.name.fr;           // nom en français
-            img.style.filter = "grayscale(100%)"; // noir et blanc
+            img.src = data.sprites.regular;
+            img.alt = data.name.fr;
+            img.style.filter = "grayscale(100%)";
         })
         .catch(err => {
             console.warn(err);
-            getRandomPokemon(); // retente si erreur
+            getRandomPokemon();
         });
 }
 
@@ -36,19 +36,23 @@ function checkAnswer() {
     if (input === currentPokemon.name.fr.toLowerCase()) {
         message.textContent = "✅ Correct !";
         score++;
+       AdvancedVibration.vibratePattern([200]);
+
     } else {
         message.textContent = `❌ Incorrect ! C'était ${currentPokemon.name.fr}`;
+        AdvancedVibration.vibratePattern([200, 100, 200]);
+
     }
 
     questionCount++;
 
     if (questionCount >= 10) {
-        // Après 1s, on affiche le formulaire final
+
         setTimeout(() => {
             showResult();
         }, 1000);
     } else {
-        // Sinon, on passe au Pokémon suivant
+
         setTimeout(() => {
             message.textContent = "";
             document.getElementById("pokemonName").value = "";
@@ -68,8 +72,10 @@ function showResult() {
     `;
 
     document.getElementById("saveBtn").addEventListener("click", saveResult);
+    AdvancedVibration.vibratePattern([200, 100, 200, 100, 200]);
+
 }
-// ➜ À appeler après deviceready
+// sauvegarder les résultats
 function saveResult() {
   if (!window.cordova || !cordova.file || !window.resolveLocalFileSystemURL) {
     alert("Sauvegarde indisponible (Cordova non prêt).");
@@ -90,7 +96,7 @@ function saveResult() {
     at: new Date().toISOString()
   };
 
-  const fileName = "scores.jsonl"; // format JSON Lines (1 enregistrement par ligne)
+  const fileName = "scores.jsonl";
   const dir = cordova.file.dataDirectory;
 
   resolveLocalFileSystemURL(
@@ -102,11 +108,11 @@ function saveResult() {
         (fileEntry) => {
           fileEntry.createWriter(
             (writer) => {
-              // Construit la ligne à écrire
+
               const line = JSON.stringify(payload) + "\n";
               const blob = new Blob([line], { type: "text/plain" });
 
-              // Seek à la fin du fichier pour append
+
               fileEntry.file(
                 (file) => {
                   try {
@@ -154,7 +160,7 @@ function onReady() {
   document.getElementById("submitBtn").addEventListener("click", checkAnswer);
 }
 
-// Cordova d'abord (plugins dispo), sinon fallback web
+
 document.addEventListener("deviceready", onReady, false);
 document.addEventListener("DOMContentLoaded", () => {
   if (!window.cordova) onReady(); // permet de tester dans le navigateur

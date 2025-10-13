@@ -53,7 +53,7 @@ function sortScores(arr) {
 }
 
 function renderRow(it, idx) {
-  const rank = (idx ?? 0) + 1; // idx ignoré ici car on map après slice
+  const rank = (idx ?? 0) + 1;
   const name = it.name || "Anonyme";
   const score = `${it.score || 0}/10`;
   const dur = it.duration || msToMinSec(it.durationMs || 0);

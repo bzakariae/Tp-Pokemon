@@ -14,7 +14,9 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^14.0.1",
-    "cordova-plugin-file": "^8.1.3"
+    "cordova-plugin-advanced-vibration": "file:cordova-plugin-advanced-vibration",
+    "cordova-plugin-file": "^8.1.3",
+    "cordova-plugin-vibration": "^3.1.1"
   },
   "cordova": {
     "platforms": [
@@ -23,7 +25,9 @@
     "plugins": {
       "cordova-plugin-file": {
         "ANDROIDX_WEBKIT_VERSION": "1.4.0"
-      }
+      },
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-advanced-vibration": {}
     }
   }
 }
