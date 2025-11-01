@@ -12,6 +12,8 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+
+        maven("https://maven.pkg.jetbrains.space/public/p/coil-kt/maven")
     }
 }
 
@@ -25,6 +27,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/coil-kt/maven")
     }
 }
 

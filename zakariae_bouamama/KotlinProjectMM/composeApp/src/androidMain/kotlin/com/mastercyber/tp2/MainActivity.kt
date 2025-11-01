@@ -1,4 +1,4 @@
-package com.mastercyber.tp1
+package com.mastercyber.tp2
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

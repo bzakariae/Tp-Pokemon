@@ -1,4 +1,4 @@
-package com.mastercyber.tp1
+package com.mastercyber.tp2
 
 class JVMPlatform: Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"
