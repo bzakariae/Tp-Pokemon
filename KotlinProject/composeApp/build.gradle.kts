@@ -33,6 +33,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation("io.ktor:ktor-client-android:${ktorVersion}")
+            implementation("io.coil-kt:coil-compose:2.7.0")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -85,6 +86,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.core.ktx)
     debugImplementation(compose.uiTooling)
 }
 

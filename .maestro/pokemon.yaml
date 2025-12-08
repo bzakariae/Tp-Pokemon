@@ -1,0 +1,26 @@
+appId: org.example.project
+
+---
+name: good guess increments counter
+steps:
+  - launchApp
+  - tapOn: "Click me!"
+  - waitForText: "Compose:"
+  - tapOn: "Nom du pokémon"     
+  - inputText: "Pikachu"        
+  - tapOn: "Valider"             
+  - assertVisible: "Bravo"       
+  - assertVisible: "Score: 1"    
+
+---
+name: bad guess does not increment counter
+steps:
+  - launchApp
+  - tapOn: "Click me!"
+  - waitForText: "Compose:"
+  - assertVisible: "Score: 0"    
+  - tapOn: "Nom du pokémon"
+  - inputText: "Toto"            
+  - tapOn: "Valider"
+  - assertVisible: "Mauvaise réponse"  
+  - assertVisible: "Score: 0"   

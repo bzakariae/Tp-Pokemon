@@ -24,6 +24,8 @@ import kotlinproject.composeapp.generated.resources.compose_multiplatform
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        var pokemon by remember { mutableStateOf<Pokemon?>(null) }
+
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -31,15 +33,17 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
+            Button(onClick = {
+                showContent = !showContent
+                if (!showContent) pokemon = null
+            }) {
                 Text("Click me!")
             }
+
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                var name by remember { mutableStateOf<String?>(null) }
                 LaunchedEffect(showContent) {
                     if (showContent) {
-                        name = Greeting().fetchPokemon()
+                        pokemon = Greeting().fetchPokemon()
                     }
                 }
                 Column(
@@ -47,7 +51,13 @@ fun App() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $name")
+                    Text("Compose: ${pokemon?.name?.fr ?: "..." }")
+
+
+                    NetworkPokemonImage(
+                        url = pokemon?.sprites?.regular,
+                        name = pokemon?.name?.fr
+                    )
                 }
             }
         }

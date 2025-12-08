@@ -25,10 +25,15 @@ class Greeting {
         }
     }
 
-    suspend fun fetchPokemon(): String? {
+    suspend fun fetchPokemon(): Pokemon {
         val random = (1..1025).random()
-        val response: Pokemon = client.get("https://tyradex.vercel.app/api/v1/pokemon/$random").body()
+        val BASE_URL = "http://10.0.2.2:8080/api/v1"
+
+        val response: Pokemon =
+            client.get("$BASE_URL/pokemon/$random").body()
+
         client.close()
-        return response.name?.fr ?: "Unknown"
+        return response
     }
+
 }
